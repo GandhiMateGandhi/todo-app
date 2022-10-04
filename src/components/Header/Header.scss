@@ -1,0 +1,19 @@
+.Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 17px;
+  margin-bottom: 22px;
+}
+
+.SettingModal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 180px;
+  border-radius: 25px;
+}

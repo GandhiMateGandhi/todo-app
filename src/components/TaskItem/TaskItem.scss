@@ -1,0 +1,43 @@
+.TaskItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &:not(:first-child) {
+    margin-top: 15px;
+  }
+
+
+  .TextBlock {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+      margin-left: 17px;
+
+    &_colorLine {
+      width: 5px;
+      height: 40px;
+      position: absolute;
+      border-radius: 3px;
+      left: -16px;
+      top: 5px;
+    }
+
+    &_title {
+      position: relative;
+
+      &__checked {
+        text-decoration: line-through;
+      }
+    }
+
+    &_description {
+      color: #FFFFFF99;
+      font-size: 14px;
+      text-align: start;
+      line-break: anywhere;
+    }
+  }
+
+}

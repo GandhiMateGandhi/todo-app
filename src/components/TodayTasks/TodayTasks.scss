@@ -1,0 +1,39 @@
+.TodayTasks {
+
+  .TodayTasksList {
+    background-color: #282828;
+    min-height: 79px;
+    border-radius: 40px;
+    box-shadow: 16px 16px 20px rgba(0, 0, 0, 0.15), -8px -8px 20px rgba(255, 255, 255, 0.05);
+    padding: 16px;
+    margin-top: 10px;
+  }
+
+  .TodayTasksHeader {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .TodayTasksCheckbox {
+    display: flex;
+    align-items: center;
+
+    &_label {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .MuiSvgIcon-root {
+      border-radius: 6px;
+      background: #fbfdff;
+      width: 23px;
+      height: 23px;
+
+      path {
+        fill: #fbfdff;
+      }
+    }
+  }
+
+
+}

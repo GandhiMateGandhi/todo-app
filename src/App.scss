@@ -1,0 +1,41 @@
+#root {
+  background-color: #222222;
+}
+
+body {
+  font-family: system-ui;
+  margin: 0;
+}
+
+.Container {
+  padding: 20px;
+  overflow-y: auto;
+  min-height: 100vh;
+  margin: auto;
+
+  .MuiTypography-root {
+    font-family: system-ui;
+
+  }
+
+  .MuiTypography-h1 {
+    font-size: 34px;
+    font-weight: 600;
+  }
+
+  .MuiTypography-h3 {
+    font-size: 24px;
+  }
+
+  color: #F4F4F4;
+
+  @media (max-width: 400px) {
+    max-width: 386px;
+  }
+
+  @media (min-width: 401px) {
+    max-width: 500px;
+    padding: 20px 40px;
+  }
+}
+

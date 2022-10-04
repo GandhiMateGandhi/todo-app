@@ -1,0 +1,23 @@
+.CreateTask {
+  .CreateTaskButton {
+    font-size: 34px;
+
+    .MuiSvgIcon-root {
+      color: #fbfdff;
+    }
+  }
+}
+
+.CreateTaskDialog {
+  .CreateTaskCalendar {
+    margin-top: 25px;
+    width: 100%;
+  }
+}
+
+.MuiDialog-root {
+  .MuiPaper-root {
+    background-image: none;
+    border-radius: 25px;
+  }
+}

@@ -1,0 +1,23 @@
+.NewsTicker {
+  position: fixed;
+  bottom: 0;
+  white-space: nowrap;
+  background-color: #20202091;
+  color: #f4f4f4;
+  padding: 5px 0;
+  transition: 0.2s ease-in-out;
+
+  p {
+    animation: running-text-animation linear 15s infinite;
+  }
+}
+
+@keyframes running-text-animation {
+  0% {
+    transform: translateX(100%)
+  }
+
+  100% {
+    transform: translateX(-100%)
+  }
+}
