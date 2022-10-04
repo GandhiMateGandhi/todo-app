@@ -4,6 +4,9 @@ import arrow from '../../assets/arrow.svg'
 import TaskItem from "../TaskItem/TaskItem";
 import './TaskBlock.scss'
 import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
 
 const TaskBlock = ({dayTasks}) => {
     const {date, tasks} = dayTasks
