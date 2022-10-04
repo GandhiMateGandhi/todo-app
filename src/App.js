@@ -31,7 +31,8 @@ function App() {
     const upcomingTasks = taskList.filter(task => {
         return task.date !== dayjs().format('MM.DD.YYYY')
     })
-    const sortedTasks = upcomingTasks.sort((a, b) => (dayjs(a.date).isAfter(dayjs(b.date)) ? 1 : -1))
+    const sortedTasks = upcomingTasks.sort((a, b) =>
+        (dayjs(a.date, 'MM.DD.YYYY').isAfter(dayjs(b.date, 'MM.DD.YYYY')) ? 1 : -1))
 
     return (
         <QueryClientProvider client={queryClient}>
