@@ -69,7 +69,6 @@ const CreateTask = () => {
                         />
 
                         <TextField
-                            autoFocus
                             margin="dense"
                             id="description"
                             label="Task description"
