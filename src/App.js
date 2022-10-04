@@ -7,9 +7,6 @@ import {useTasks} from "./context/Context";
 import dayjs from "dayjs";
 import {QueryClient, QueryClientProvider, useQuery} from 'react-query'
 import NewsTicker from "./components/NewsTicker/NewsTicker";
-import customParseFormat from 'dayjs/plugin/customParseFormat';
-
-dayjs.extend(customParseFormat);
 
 const queryClient = new QueryClient()
 

@@ -4,14 +4,11 @@ import arrow from '../../assets/arrow.svg'
 import TaskItem from "../TaskItem/TaskItem";
 import './TaskBlock.scss'
 import dayjs from 'dayjs'
-import customParseFormat from 'dayjs/plugin/customParseFormat';
-
-dayjs.extend(customParseFormat);
 
 const TaskBlock = ({dayTasks}) => {
     const {date, tasks} = dayTasks
     const tomorrow = dayjs().add(1, 'day').format("MM.DD.YYYY")
-    const upcomingDate = dayjs(date).format('DD/MM')
+    const upcomingDate = dayjs(date, 'MM.DD.YYYY').format('DD/MM')
 
     return (
         <Accordion style={{borderRadius: '25px'}} className="TaskBlock">
