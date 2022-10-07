@@ -1,16 +1,25 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import './Header.scss'
 import {Box, IconButton, Modal, Switch, Typography} from "@mui/material";
 import cog from "../../assets/cog.svg";
-import {useTasks} from "../../context/Context";
+import Context from "../../context/Context";
+import {TaskListContextType} from "../../@types/types";
 
-const Header = () => {
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+const Header: FC = () => {
+    const {isTickerVisible, setIsTickerVisible} =  React.useContext(Context) as TaskListContextType;
+    const [open, setOpen] = useState<boolean>(false);
 
-    const {isTickerVisible, setIsTickerVisible} = useTasks()
 
+    const handleOpen = (e: React.MouseEvent<HTMLButtonElement>): void => {
+        setOpen(true)
+    };
+    const handleClose = (e: React.MouseEvent | React.KeyboardEvent): void => {
+        setOpen(false)
+    };
+
+    const changeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setIsTickerVisible(!isTickerVisible)
+    }
 
     const style = {
         bgcolor: 'background.paper',
@@ -33,7 +42,7 @@ const Header = () => {
                 <Box sx={style} className="SettingModal">
                     <Typography id="modal-modal-title" variant="h6" component="h3">News ticker</Typography>
                     <Switch checked={isTickerVisible}
-                            onChange={(e) => setIsTickerVisible(!isTickerVisible)}
+                            onChange={changeHandler}
                             color="default"/>
                 </Box>
             </Modal>

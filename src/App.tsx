@@ -3,14 +3,16 @@ import TaskBlock from "./components/TaskBlock/TaskBlock";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import Header from "./components/Header/Header";
 import TodayTasks from "./components/TodayTasks/TodayTasks";
-import {useTasks} from "./context/Context";
 import dayjs from "dayjs";
 import {QueryClient, QueryClientProvider, useQuery} from 'react-query'
 import NewsTicker from "./components/NewsTicker/NewsTicker";
+import React, {FC} from "react";
+import Context from "./context/Context";
+import {TaskListContextType, ITaskList} from "./@types/types";
 
 const queryClient = new QueryClient()
 
-function App() {
+const App: FC = () => {
     const darkTheme = createTheme({
         palette: {
             mode: 'dark',
@@ -26,12 +28,12 @@ function App() {
         },
     });
 
-    const {taskList} = useTasks()
+    const {taskList} = React.useContext(Context) as TaskListContextType;
 
-    const upcomingTasks = taskList.filter(task => {
+    const upcomingTasks = taskList.filter((task: ITaskList) => {
         return task.date !== dayjs().format('MM.DD.YYYY')
     })
-    const sortedTasks = upcomingTasks.sort((a, b) =>
+    const sortedTasks = upcomingTasks.sort((a: ITaskList, b: ITaskList) =>
         (dayjs(a.date, 'MM.DD.YYYY').isAfter(dayjs(b.date, 'MM.DD.YYYY')) ? 1 : -1))
 
     return (
@@ -40,7 +42,8 @@ function App() {
                 <div className="Container">
                     <Header/>
                     <TodayTasks/>
-                    {sortedTasks.map((dayTasks, index) => <TaskBlock key={index} dayTasks={dayTasks}/>)}
+                    {sortedTasks.map((dayTasks: ITaskList, index: number) =>
+                        <TaskBlock key={index} date={dayTasks.date} tasks={dayTasks.tasks}/>)}
                 </div>
                 <NewsTicker/>
             </ThemeProvider>

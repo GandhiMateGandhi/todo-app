@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {FC} from 'react';
 import './NewsTicker.scss'
 import {useQuery} from "react-query";
 import {Typography} from "@mui/material";
-import {useTasks} from "../../context/Context";
+import Context from "../../context/Context";
+import {IPost, TaskListContextType} from "../../@types/types";
 
-const NewsTicker = () => {
-    const {isTickerVisible} = useTasks()
+
+const NewsTicker: FC = () => {
+    const {isTickerVisible} = React.useContext(Context) as TaskListContextType;
+
 
     const {isLoading, error, data} = useQuery(['repoData'], () =>
         fetch('https://jsonplaceholder.typicode.com/posts/' + Math.floor(Math.random() * 99)).then(res =>
@@ -14,7 +17,7 @@ const NewsTicker = () => {
     )
 
 
-    if (error) return 'An error has occurred: ' + error.message
+    if (error) alert(error)
 
     return (
         <div className="NewsTicker" style={{opacity: isTickerVisible ? 1 : 0}}>

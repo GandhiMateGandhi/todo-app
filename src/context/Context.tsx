@@ -1,15 +1,21 @@
-import {createContext, useContext, useState} from "react";
-import {v4} from "uuid"
+import {createContext, FC, ReactNode, useContext, useState} from "react";
 import dayjs from "dayjs";
+import {ITaskList, ITask, TaskListContextType} from "../@types/types";
+import {v4} from "uuid";
 
-const Context = createContext()
-export const useTasks = () => useContext(Context)
 
-export function TaskProvider({children}) {
+interface ContextProps {
+    children: ReactNode
+}
+
+const Context = createContext<TaskListContextType | null>(null)
+// export const useTasks = () => useContext(Context)
+
+export const TaskProvider = ({children}: ContextProps) => {
     const today = dayjs().format('MM.DD.YYYY')
     const description = 'Lorem ipsum dolor sit amet.'
-    const [isTickerVisible, setIsTickerVisible] = useState(true)
-    const [taskList, setTaskList] = useState([
+    const [isTickerVisible, setIsTickerVisible] = useState<boolean>(false)
+    const [taskList, setTaskList] = useState<ITaskList[]>([
         {
             date: today,
             tasks: [
@@ -74,8 +80,8 @@ export function TaskProvider({children}) {
         }
     ])
 
-    const addTask = (title, description, date) => {
-        const addedTask = taskList.find(task => task.date === date)
+    const addTask = (title: string, description: string, date: string) => {
+        const addedTask = taskList.find((task: ITaskList) => task.date === date)
 
         if (addedTask) {
             addedTask.tasks.push({
@@ -94,15 +100,15 @@ export function TaskProvider({children}) {
         }
     }
 
-    const setTaskChecked = (checked, id, date) => {
+    const setTaskChecked = (checked: boolean, id: string, date: string) => {
         if (date === today) {
-            const checkedTask = taskList[0].tasks.find(task => task.id === id)
+            const checkedTask = taskList[0].tasks.find((task: ITask) => task.id === id) || taskList[0].tasks[0]
             checkedTask.checked = !checkedTask.checked
 
             setTaskList([...taskList])
         } else {
-            const taskBlock = taskList.find(item => item.date === date)
-            const checkedTask = taskBlock.tasks.find(task => task.id === id)
+            const taskBlock = taskList.find((item: ITaskList) => item.date === date)
+            const checkedTask = taskBlock?.tasks.find((task: ITask) => task.id === id) || taskList[0].tasks[0]
             checkedTask.checked = !checkedTask.checked
 
             setTaskList([...taskList])

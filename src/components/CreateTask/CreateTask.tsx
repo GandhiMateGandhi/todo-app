@@ -10,24 +10,26 @@ import {
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 import './CreateTask.scss'
 import {MobileDatePicker} from '@mui/x-date-pickers/MobileDatePicker';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {useTasks} from '../../context/Context'
+import Context from "../../context/Context";
+import {TaskListContextType} from "../../@types/types";
 
 const CreateTask = () => {
-    const {addTask} = useTasks()
+    const {addTask} = React.useContext(Context) as TaskListContextType;
+
 
     const [open, setOpen] = useState(false);
-    const [date, setDate] = useState(dayjs(new Date()));
+    const [date, setDate] = useState<Dayjs | null>(dayjs(new Date()));
     const [taskTitle, setTaskTitle] = useState('')
     const [taskDescription, setTaskDescription] = useState('')
 
-    const handleDateChange = (date) => {
+    const handleDateChange = (date: Dayjs | null) => {
         setDate(date);
     };
 
-    const handleClickOpen = () => {
+    const handleClickOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
         setOpen(true);
     };
 
@@ -35,9 +37,9 @@ const CreateTask = () => {
         setOpen(false);
     };
 
-    const handleCreate = (e) => {
+    const handleCreate = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
-        addTask(taskTitle, taskDescription || '...', date.format('MM.DD.YYYY'));
+        addTask(taskTitle, taskDescription || '...', date?.format('MM.DD.YYYY') || '01.01.2023');
         setTaskTitle('')
         setTaskDescription('')
         setDate(dayjs(new Date()));
@@ -65,7 +67,7 @@ const CreateTask = () => {
                             value={taskTitle}
                             onChange={e => setTaskTitle(e.target.value)}
                             autoComplete='off'
-                            inputProps={{ maxLength: 17 }}
+                            inputProps={{maxLength: 17}}
                         />
 
                         <TextField
@@ -78,13 +80,13 @@ const CreateTask = () => {
                             value={taskDescription}
                             onChange={e => setTaskDescription(e.target.value)}
                             autoComplete='off'
-                            inputProps={{ maxLength: 160 }}
+                            inputProps={{maxLength: 160}}
                         />
 
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <MobileDatePicker
                                 className="CreateTaskCalendar"
-                                label="Date"
+                                label="Date Picker"
                                 inputFormat="DD.MM.YYYY"
                                 value={date}
                                 onChange={handleDateChange}

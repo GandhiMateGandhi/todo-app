@@ -2,14 +2,15 @@ import React from 'react';
 import './TaskItem.scss'
 import {
     styled,
-    Switch, Typography
+    Switch, SwitchProps, Typography
 } from "@mui/material";
 import check from '../../assets/check.svg'
 import cross from '../../assets/cross.svg'
-import {useTasks} from "../../context/Context";
+import Context from "../../context/Context";
+import {ITaskItem, TaskListContextType} from "../../@types/types";
 
-const IOSSwitch = styled((props) => (
-    <Switch size='large' focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+const IOSSwitch = styled((props: SwitchProps) => (
+    <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({theme}) => ({
     width: 50,
     height: 30,
@@ -76,11 +77,11 @@ const IOSSwitch = styled((props) => (
 }));
 
 
-const TaskItem = ({id, title, description, checked, date, index}) => {
+const TaskItem = ({id, title, description, checked, date, index} : ITaskItem) => {
 
-    const {setTaskChecked} = useTasks()
+    const {setTaskChecked} = React.useContext(Context) as TaskListContextType;
 
-    const onCheckboxChange = (e) => {
+    const onCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTaskChecked(e.target.checked, id, date)
     }
 

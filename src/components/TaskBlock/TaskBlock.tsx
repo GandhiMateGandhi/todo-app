@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Accordion, AccordionDetails, AccordionSummary, Typography} from "@mui/material";
 import arrow from '../../assets/arrow.svg'
 import TaskItem from "../TaskItem/TaskItem";
 import './TaskBlock.scss'
 import dayjs from 'dayjs'
+import {ITaskBlock} from "../../@types/types";
 
-const TaskBlock = ({dayTasks}) => {
-    const {date, tasks} = dayTasks
+
+const TaskBlock = ({date, tasks}: ITaskBlock) => {
     const tomorrow = dayjs().add(1, 'day').format("MM.DD.YYYY")
     const upcomingDate = dayjs(date, 'MM.DD.YYYY').format('DD/MM')
 
@@ -24,7 +25,8 @@ const TaskBlock = ({dayTasks}) => {
 
             </AccordionSummary>
             <AccordionDetails>
-                {tasks?.map((task, index) => <TaskItem key={task.id} {...task} index={index} date={date}/>)}
+                {tasks?.map((task: any, index: number) =>
+                    <TaskItem key={task.id} {...task} index={index} date={date}/>)}
             </AccordionDetails>
         </Accordion>
     );
