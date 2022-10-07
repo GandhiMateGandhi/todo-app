@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import './TaskItem.scss'
 import {
     styled,
@@ -77,7 +77,7 @@ const IOSSwitch = styled((props: SwitchProps) => (
 }));
 
 
-const TaskItem = ({id, title, description, checked, date, index} : ITaskItem) => {
+const TaskItem: FC<ITaskItem> = ({id, title, description, checked, date, index}) => {
 
     const {setTaskChecked} = React.useContext(Context) as TaskListContextType;
 

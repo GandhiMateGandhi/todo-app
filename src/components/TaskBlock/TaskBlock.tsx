@@ -7,7 +7,7 @@ import dayjs from 'dayjs'
 import {ITaskBlock} from "../../@types/types";
 
 
-const TaskBlock = ({date, tasks}: ITaskBlock) => {
+const TaskBlock:FC<ITaskBlock> = ({date, tasks}) => {
     const tomorrow = dayjs().add(1, 'day').format("MM.DD.YYYY")
     const upcomingDate = dayjs(date, 'MM.DD.YYYY').format('DD/MM')
 

@@ -1,20 +1,18 @@
-import {createContext, FC, ReactNode, useContext, useState} from "react";
+import {createContext, FC, ReactNode, useState} from "react";
 import dayjs from "dayjs";
 import {ITaskList, ITask, TaskListContextType} from "../@types/types";
 import {v4} from "uuid";
-
 
 interface ContextProps {
     children: ReactNode
 }
 
 const Context = createContext<TaskListContextType | null>(null)
-// export const useTasks = () => useContext(Context)
 
-export const TaskProvider = ({children}: ContextProps) => {
+export const TaskProvider: FC<ContextProps> = ({children}) => {
     const today = dayjs().format('MM.DD.YYYY')
     const description = 'Lorem ipsum dolor sit amet.'
-    const [isTickerVisible, setIsTickerVisible] = useState<boolean>(false)
+    const [isTickerVisible, setIsTickerVisible] = useState<boolean>(true)
     const [taskList, setTaskList] = useState<ITaskList[]>([
         {
             date: today,
@@ -57,7 +55,7 @@ export const TaskProvider = ({children}: ContextProps) => {
             ]
         },
         {
-            date: '10.09.2022',
+            date: '11.09.2022',
             tasks: [
                 {
                     id: v4(),
@@ -68,7 +66,7 @@ export const TaskProvider = ({children}: ContextProps) => {
             ]
         },
         {
-            date: '10.11.2022',
+            date: '11.11.2022',
             tasks: [
                 {
                     id: v4(),
