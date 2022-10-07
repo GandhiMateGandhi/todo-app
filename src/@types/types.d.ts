@@ -3,19 +3,13 @@ export interface ITaskBlock {
     tasks: object[];
 }
 
-export interface IPost {
-    userId: number;
-    id: number;
-    title: string;
-    body: string;
-}
-
 export interface ITask {
     id: string;
     title: string;
     description: string;
     checked: boolean;
 }
+
 export interface ITaskItem {
     id: string;
     title: string;
